@@ -1,0 +1,2223 @@
+[MUSIC PLAYING]
+
+JAMES LAU: Thank you.
+
+Thanks for being
+here this morning.
+
+My name is James, and I'm part
+of the Kotlin team at Google.
+
+Today, I have the pleasure
+of introducing a very
+
+special guest from
+JetBrains, who really
+
+requires no introduction.
+
+Now, all of you know
+that Kotlin is now
+
+one of the most
+loved programming
+
+languages in the world.
+
+And at Google I/O,
+it's very rare for us
+
+to have external speakers.
+
+But this person
+was here last year,
+
+and we invited him back because
+we couldn't think of anybody
+
+else better to teach
+Kotlin, other than one
+
+of the people who invented it.
+
+So please help me welcome
+the lead language designer
+
+for Kotlin, Andrey Breslav.
+
+[APPLAUSE]
+
+ANDREY BRESLAV:
+Thank you, James.
+
+Thanks for a great introduction.
+
+Hello, everybody.
+
+I'm very glad to see you here.
+
+Today, I'm going to talk
+about what can it be--
+
+Kotlin-- I guess.
+
+And I really am going
+to do a live demo,
+
+so please bring my demo on.
+
+So the reason why I have this
+horrible code in the slides
+
+is that we are all learning,
+and our old habits sometimes
+
+get in the way.
+
+So I'll be presenting today on
+the topic of how you get out
+
+of your Java habits and
+get to your Kotlin habits.
+
+So we all come from different
+backgrounds, of course.
+
+And many of us started with
+the Java programming language
+
+and built up our knowledge
+of programming through this.
+
+So we remember many things.
+
+And the thing is Kotlin has
+been inspired by many languages,
+
+including the Java
+programming language.
+
+So you can reproduce many of
+the Java constructs in Kotlin.
+
+And it will work.
+
+You can get your
+job done this way,
+
+but it can be, in many
+cases, improved dramatically.
+
+So this particular example
+is about declaring classes.
+
+And you can see here that I
+have a Kotlin class on the left
+
+and the Java class on the right.
+
+And they look very similar.
+
+But this is definitely not
+how we write Kotlin code.
+
+So what do you are
+actually supposed to do
+
+is remove all the
+unnecessary stuff.
+
+What I have to say here is
+two properties, one class.
+
+That's it, right?
+
+So I can try to
+transform it by hand,
+
+but I actually want to
+show off a nice tool.
+
+And simply copy and paste
+the code from the Java side
+
+to the Kotlin side, so it
+will use the Java to Kotlin
+
+converter built into the
+IDE, and do it for me.
+
+So boom, there it is.
+
+A single line that's
+actually all you
+
+needed to declare one
+class, two properties.
+
+That's it.
+
+All I have here is a class
+with a primary constructor.
+
+So it has two parameters and
+both of them are properties.
+
+And that's all
+you wanted to say.
+
+So this is one of
+the things that
+
+demonstrates how cheap
+declaring classes is in Kotlin.
+
+And there's a
+consequence to this.
+
+So look at this code.
+
+Here, it's obviously not how
+you're supposed to write code
+
+in any language, actually.
+
+I wanted to parse a full
+name into a first name
+
+and a last name.
+
+And so that's what
+I'm doing here.
+
+But how do I pack the result
+to put it out of the function?
+
+I don't have a way of returning
+two things from a function.
+
+I have to put into one object.
+
+And I'm abusing a list here,
+then awkwardly taking out one
+
+and the other to make a
+first name and a last name.
+
+Don't do this in any language.
+
+But there is kind of
+a psychological reason
+
+to doing this, at least
+in our old habits,
+
+because declaring classes
+is expensive, right?
+
+You have to create a new
+file, put a lot of code in it.
+
+It's kind of awkward.
+
+But in Kotlin, you
+don't have to do this.
+
+All you need to say,
+my class, full name,
+
+with first and last
+names as properties.
+
+And then, all I need to do
+here is just return that.
+
+So my full name.
+
+Here it goes.
+
+And now instead of indices, I
+can say first and last right
+
+here.
+
+So that's the idea.
+
+Classes being
+cheap is not always
+
+saving you time at
+the declaration site,
+
+it's saving you mental effort.
+
+You can represent your
+multiple return as a class
+
+and it doesn't
+cost you anything.
+
+So if I run this, you'll
+see that my equals
+
+doesn't work, obviously, because
+that's a single-line class.
+
+And so now I'll go to
+declare equals there,
+
+and then a hash code there,
+and so on and so forth.
+
+It's so verbose.
+
+But I really don't need
+to do this in Kotlin,
+
+because you probably
+know that there is
+
+something called data classes.
+
+Who knows data classes?
+
+Many people, good.
+
+So you know that I simply
+put this single keyword there
+
+and the compiler generates many
+things for me-- it's equal,
+
+it's hash code,
+it's to a string,
+
+and many other
+convenient methods.
+
+So that's it.
+
+Change your mind about
+how expensive a class is.
+
+You can use it easily in
+all your abstractions.
+
+So more or less done
+with the warm up.
+
+Let's look at something else--
+
+properties.
+
+So we talked about classes.
+
+We'll go through properties,
+and then go over to functions.
+
+So here is a property done
+the way you shouldn't do it
+
+in Kotlin, again.
+
+So the problems that
+I showed you before
+
+were kind of one-liners where
+both the getter and setter is
+
+trivial.
+
+If you want a custom
+setter, you definitely
+
+don't define functions for that.
+
+You have your custom setter
+syntax, as you probably know.
+
+If you know data
+classes, you know that.
+
+So inside a custom setter,
+you have field to--
+
+not filed, but field--
+
+to write to your backend
+storage, but that's it.
+
+You don't need to introduce
+extra names in anything else.
+
+So that's
+straightforward, right?
+
+But then look at this code.
+
+So here is already
+some sensible logic.
+
+I have two properties, one
+of them private and nullable
+
+and mutable.
+
+And on my first access, I'm
+checking if that's null,
+
+and then I compute a
+value and write into it.
+
+And then I output,
+return it from my getter.
+
+So what is it?
+
+It's a lazy property, right?
+
+I personally wrote
+dozens and thousands
+
+of those in Java and
+many other languages,
+
+so I got kind of bored by that.
+
+And that's why Kotlin has an
+abstraction mechanism called
+
+delegation for properties.
+
+So delegated properties
+let you get rid
+
+of all the repetition
+of this lazy logic.
+
+All we care about is
+this expression here.
+
+So let's just do it.
+
+Implement my property by
+just lazy of all this.
+
+This is it.
+
+So what I'm having
+now, I'm saying
+
+my property is not simply
+initialized by something.
+
+It's delegated to
+this lazy thing here.
+
+And upon first access, this
+lambda will be executed.
+
+And then, the rest will
+be stored by the library.
+
+So lazy is not a
+language construct,
+
+it's just a library function.
+
+You can define your own.
+
+And the library provides
+you with many other things.
+
+So the takeaway
+here is that if you
+
+have a common kind of property,
+like observable for example,
+
+when you need to be notified
+that something was modified,
+
+use a library or write your own.
+
+So here, delegates.observable
+does the job
+
+from the standard library.
+
+But if you like, you don't
+have to write code like this.
+
+When you have one property,
+and then the other property,
+
+and the other doing the same and
+same thing over and over again,
+
+all you need to do
+is this, actually.
+
+Declare a single class
+that encapsulates
+
+the logic of your property,
+like your generic getter
+
+and generic setter.
+
+And that's it.
+
+You can now simply refer to
+this class in many properties
+
+and get your business
+logic database access,
+
+all kinds of validation.
+
+Anything you like can be
+abstracted as a library
+
+and then reused
+across your project.
+
+Does it make sense?
+
+Who uses this already?
+
+I don't know.
+
+So many people.
+
+You actually should.
+
+I'm sure you can
+benefit from this.
+
+So this is more or less
+it about properties.
+
+And now, let's get to functions.
+
+Functions are very
+important, right?
+
+So again, this is
+very horrible code.
+
+Don't write code like
+this in Kotlin, please.
+
+This is very much
+inspired by our habits
+
+in the Java programming
+language, when I have
+
+to put everything into a class.
+
+So StringUtil-- does your
+project has its own StringUtil
+
+class?
+
+Oh, if it doesn't, it's just
+a very new project, right?
+
+So any of my projects have them.
+
+But the thing is, in Kotlin,
+it's a little different.
+
+You don't have to use a class.
+
+Well, first of all, Kotlin
+classes don't have statics.
+
+So to use these functions
+from this class,
+
+you have to say a
+StringUtil, parentheses,
+
+which makes a new object.
+
+I don't want a new
+object every time.
+
+I want it like this, so I turn
+this class into an object.
+
+It's a little bit of an
+improvement in my insanity,
+
+right?
+
+So I was creating
+an object every time
+
+I wanted to call a function.
+
+That's crazy.
+
+But really, in Kotlin, I don't
+need any enclosing container
+
+at all because I have
+top-level functions.
+
+So this may seem obvious like
+functions, what are they?
+
+They're just
+declarations, right?
+
+But some languages have them
+only in classes and many people
+
+learn this and rely on this.
+
+So this is a lot
+more of a Kotlin way,
+
+but it's still
+not great in terms
+
+of what you can achieve with
+Kotlin, because here, you
+
+have two overloads.
+
+So getFirstWord is
+supposed to parse a string,
+
+find a first space, and take
+the first word, and return it.
+
+But what if the separator
+is not a space, but a comma
+
+or something?
+
+So here is a more
+full-featured version.
+
+And then, this is how
+you'll call it actually
+
+in most contexts.
+
+So what I wanted to express
+here is just a default value.
+
+In Java, we are used to
+using overloads for this,
+
+and also some people
+use nullable parameters
+
+like pass and null here, and
+I'll give you a default value.
+
+Don't do this in Kotlin.
+
+You don't need to.
+
+So all you need to do actually,
+is simply specify your default.
+
+My default is space, here.
+
+That's it.
+
+So there was no need
+to emulate defaults.
+
+They are both into the language.
+
+And same for when you
+have many, many default
+
+parameters with
+different values,
+
+like multiple Booleans,
+so on, so forth.
+
+You can just use named parameter
+syntax to express which of them
+
+you actually need.
+
+And all of the rest
+will be used by default.
+
+So this makes functions
+fewer in the first place,
+
+and then a lot more expressive.
+
+OK.
+
+Good with functions, right?
+
+Well, actually, this
+function is kind of midway
+
+between the Kotlin
+style and the Java style
+
+because it's actually
+working on strings.
+
+Very much a good idea to put
+this into a string class.
+
+Oh, wait, it's not.
+
+Because the string class
+is not controlled by you,
+
+you can't put everything
+into the string class.
+
+And you really want to keep
+the string API minimal.
+
+So what I would
+really like to do
+
+is something like this,
+where I can say my string,
+
+getFirstWord, and that's it.
+
+So it looks like a method.
+
+It's called an extension
+function, actually.
+
+It's not sitting
+in a string class.
+
+I didn't go into the JDK and
+alter the class I can control.
+
+But still, it works like this.
+
+So this is the
+mechanism you can use.
+
+I'll do it manually to
+illustrate how it works here.
+
+So I have a receiver
+of type string.
+
+Now, I don't need this
+parameter anymore.
+
+And I can say this dot
+here, and use my this here
+
+or omit all of this
+on the left-hand side.
+
+So now, I'll be able
+to use it this way.
+
+Make sense?
+
+I can do the same
+with a property.
+
+Actually, it would be very
+nice to do it this way--
+
+just so I have first
+word as a property name.
+
+And you can have an
+extension property.
+
+Of course, there will
+be no customization
+
+for the separator, but
+otherwise you're good to go.
+
+Yep, I'll just need
+to put a space here.
+
+And that's it.
+
+So extension functions,
+extension properties--
+
+it's actually a
+very important idea.
+
+It's not only just convenience.
+
+It allows you to keep your
+classes really minimal.
+
+So look at the string
+class in Kotlin.
+
+It's only five methods.
+
+If you compare that to Java,
+it will be screens and screens
+
+of declarations.
+
+So you can keep
+your API minimal.
+
+And all the utility
+functions can be extensions,
+
+can sit in different libraries,
+can be modularized like this.
+
+And that's a very important
+tool for designing APIs.
+
+Do you have questions?
+
+OK.
+
+I couldn't take them anyway.
+
+OK, now, let's have
+a look at this.
+
+Here, I'm doing
+something very typical.
+
+I'm traversing a hierarchy.
+
+So I have containers
+and leaf elements.
+
+Containers can be
+nested in one another.
+
+Leaf elements sit there.
+
+All leaf elements
+hold text and I
+
+want to extract all the
+text from this hierarchy.
+
+Pretty straightforward.
+
+So my classes are
+three lines of code--
+
+not much.
+
+There's an element.
+
+There's a container with
+the list of children.
+
+There is text.
+
+Now, I'm traversing this.
+
+So I'm using
+extension functions.
+
+I'm using top-level functions,
+everything as I told you.
+
+So it's all right, but
+I don't like this code.
+
+Why don't I like it?
+
+Here, to traverse a
+hierarchy, I need recursion.
+
+So I need to pass the string
+builder down the stack
+
+and add to it as I'm
+going down the tree.
+
+But then, I end up with
+top-level function that's
+
+only needed by this one here.
+
+So this one is not
+really needed anywhere
+
+but inside this function.
+
+So what I'd really like to
+do is just put it inside--
+
+just go here and make
+it a local function.
+
+So again, it's just expressing
+that nobody else needs this.
+
+You don't need private
+helpers anymore--
+
+a look for local helpers.
+
+And this can be
+improved a little bit.
+
+You can actually
+make use of closure.
+
+So I can create my
+string builder right here
+
+and get rid of all this.
+
+So I don't need to return
+or take parameters here.
+
+All I need here is use
+whatever is declared above.
+
+And then I just do
+extractText of e right here
+
+and return string
+builder toString.
+
+ExtractText-- oh, sorry-- it's
+an extension function, right?
+
+No, sorry.
+
+Yeah, so here is how it goes.
+
+You can turn something into
+a local function and leverage
+
+closure.
+
+So this variable is declared
+outside my function.
+
+It's not accessible to
+anyone outside the outer.
+
+And I'm using it
+here and that's it.
+
+Now, local functions, extension
+functions, top-level functions,
+
+default parameters-- use these.
+
+They will make your code nicer.
+
+Now, let's look at
+what's still there.
+
+Do you see grey code?
+
+Grey code is useless.
+
+The IDE and the compiler show
+you that something is not
+
+needed there, and
+it actually isn't.
+
+This class is redundant because
+we have this is check here.
+
+So you simply can remove this.
+
+And I don't know if you see--
+
+oh, yeah, you do--
+
+but the text variable
+has gone green.
+
+Why is it green?
+
+It's because the compiler can
+figure out the casts for you.
+
+It's actually much safer.
+
+It's not only convenient.
+
+I'm really annoyed at my
+casts all over the place.
+
+So I know it's text.
+
+Why don't you know?
+
+Well, now it knows.
+
+And actually, you don't
+need this variable either
+
+because it's the only usage.
+
+And it's same thing here.
+
+And then, my container
+can be inline as well.
+
+So here it is.
+
+I can use smart casts.
+
+It makes your code
+safer, more concise.
+
+And actually, it makes
+all the casts that still
+
+are in your program meaningful.
+
+So when you see an as
+operator in Kotlin now,
+
+you know it means something.
+
+It's not just a useless
+compliment to the
+
+is check above.
+
+Also this thing here is kind of
+stupid because what I'm doing,
+
+I'm just applying the same
+function to everything.
+
+And it's a single function.
+
+So what I want to do
+is something like this.
+
+That's a little
+bit nicer looking.
+
+And then, let's look
+at what we have.
+
+We are traversing a hierarchy.
+
+I have my leaves.
+
+I have my containers.
+
+And that's what I want
+to express, right?
+
+I'm checking different cases.
+
+So to do that, it's a lot
+nicer to use a when statement.
+
+When can switch in
+types right here.
+
+But there is an
+annoying thing about it.
+
+And it's again, coming
+from my old habits.
+
+I'm declaring a close hierarchy.
+
+I have only containers
+and text, right?
+
+I don't have anything else.
+
+But now, I have this pretty
+annoying else case right here.
+
+Why?
+
+Because the compiler
+has no idea.
+
+I don't have anything
+but containers and text.
+
+It's just an abstract class
+and I have some cases there.
+
+But you can actually express
+this in Kotlin with sealed.
+
+I can have a sealed
+class, which means
+
+all the subclasses are known.
+
+You can declare them
+outside this file.
+
+And this way, the
+IDE and the compiler
+
+know that this else is useless.
+
+So we went from almost
+two screens of code
+
+to less than one, simply
+applying the idioms of Kotlin
+
+to this code.
+
+Do you have questions?
+
+I'm sorry.
+
+All right.
+
+So now, let's just
+continue with this exercise
+
+and look at some more examples
+of expressions that are written
+
+like with old habits in mind.
+
+And we'll try to transform
+them into something better.
+
+So the first thing that
+really stands out here is var.
+
+I can't say never use var.
+
+Vars are useful.
+
+Mutable variables can be
+used for many nice things.
+
+But it's kind of discouraged.
+
+If you need a var, you
+need a very good reason.
+
+Here is not good reason
+using a val, definitely.
+
+Then here, let's
+look at these three.
+
+It's repetition.
+
+Repetition is ugly.
+
+Repetition is
+error-prone, especially
+
+if this was not a single
+name, but many things chained.
+
+So I would like to get
+rid of this repetition.
+
+What I can do is say, with ex.
+
+Does anyone remember Pascal?
+
+Pascal, anyone?
+
+Oh, good.
+
+Good.
+
+I started in Pascal, almost.
+
+So it had this weird thing,
+which was a building construct.
+
+In Kotlin, it's a function.
+
+We can use it.
+
+And here, we can get
+rid of all the ex things
+
+here, just like this.
+
+And now it looks even
+more stupid, right?
+
+I'm just assigning to
+the same variables.
+
+Don't do that.
+
+OK, so now I have a print line
+with string plus something,
+
+string plus something,
+string plus something.
+
+It's awkward.
+
+Most languages now have
+string interpolation.
+
+Kotlin has that as well.
+
+So what you actually
+need here is this.
+
+OK, done with this one.
+
+Import things into
+your scope with with.
+
+Use string
+interpolation, it's nice.
+
+Now here, I'm creating
+a map the old way.
+
+I can kind of make it a
+little nicer like this
+
+by using my operators,
+but it's really much nicer
+
+if I just use a
+builder function.
+
+So what I can do here is replace
+all my map things with pairs.
+
+Oh, not pairs, but pair, sorry.
+
+Typing when talking
+is difficult.
+
+Yeah, so a map can be
+constructed of pairs, right?
+
+And map was only a set of
+pairs from key to value.
+
+But actually, pairs are
+kind of redundant in this,
+
+so we're usually using
+the to function here.
+
+It's not a built-in operator,
+just a library function
+
+here, so this is how
+you create a map.
+
+And when you want
+to traverse the map,
+
+you can say here, key
+and value, and just
+
+have your variables
+like this, which makes
+
+for loops a lot more concise.
+
+This example of code,
+with my if statement,
+
+is something I really hated
+about my code in Java.
+
+Because these assignments here,
+they all fall apart so easily,
+
+so I really like to do
+things like this in Kotlin.
+
+So if, and many other things,
+are actually expressions.
+
+This is something
+pretty unfamiliar
+
+for the C language family.
+
+We are used to dividing
+our code into statements
+
+and expressions, right?
+
+Statements are things
+that have effects.
+
+Expressions are things
+that have values.
+
+So you assign expressions to
+variables and write statements
+
+to assign things to things.
+
+So Kotlin is halfway between
+this procedural tradition
+
+and functional tradition.
+
+So we have a lot more
+expressions than you're
+
+used to in other languages.
+
+So you can do this here.
+
+And of course, you
+don't have to use a var.
+
+You don't have to
+make a different line.
+
+And you can assign
+it right away.
+
+So if expression, make it nicer.
+
+By the way, the result
+of the expression
+
+is the last thing in the block.
+
+So the same for when.
+
+When is not simply
+switch case on steroids,
+
+it's largely and
+importantly, an expression.
+
+So you can also do
+it like this, right?
+
+So not many returns
+here, but one return here
+
+will be a lot nicer.
+
+Also you don't have to repeat
+yourself, of course, this much.
+
+And you can say even this.
+
+By the way, if you want to check
+if something is odd and even,
+
+don't do it like me.
+
+It's only for demo purposes.
+
+Don't try this at home.
+
+It will hurt.
+
+Yeah, so this one can be
+further simplified like this.
+
+So again, you're trying
+to remove the noise.
+
+When you see code
+like this, just
+
+try to get rid of the noise.
+
+Noise is harmful for your brain.
+
+Last thing, just a
+quick demo of what
+
+do you do with nullability.
+
+So these question marks-- who's
+familiar with nullable types
+
+in Kotlin?
+
+How many people?
+
+I'll go really, really quick.
+
+So you can nullable types.
+
+And compiler makes you
+do things like this.
+
+So it's in there now.
+
+The string is nullable.
+
+You can dereference it.
+
+You can either do this,
+which says just safely
+
+dereference me--
+
+which by the way,
+you can do here
+
+as well so you don't have
+to write an if around it.
+
+And you can actually
+simplify it like this.
+
+Another nice thing
+is that you can
+
+use an elvis operator like
+this, so to simplify your longer
+
+if statements into something.
+
+And this is kind of curious
+because this is definitely
+
+in an expression
+position, right?
+
+So how elvis works?
+
+Elvis takes an expression to
+the left-hand side of a string,
+
+asks are you a
+null really nicely.
+
+And then if it's a null, it
+evaluates the right-hand side.
+
+But the right-hand side has
+to be an expression, right?
+
+Basically, it's supposed
+to be a default.
+
+So if you are now on
+the left-hand side,
+
+use a default on
+the right-hand side.
+
+But your default can
+be just a return,
+
+which means that you don't
+compute any value there.
+
+You just jump out
+of the function.
+
+And that's a quite interesting
+thing from the type system
+
+standpoint, but I'm not
+giving a lecture here.
+
+I'm doing a demo.
+
+OK, we're good with expressions.
+
+Let's look at some
+functional style.
+
+So people very often
+refer to Kotlin
+
+as a functional language.
+
+I don't think it is, actually.
+
+I think Kotlin is a
+multi-paradigm language that
+
+supports functional style.
+
+You don't have to write
+functional in Kotlin,
+
+but it's oftentimes
+very nice to do it.
+
+So let's have a look at this.
+
+So in my Java old
+days in mind, I
+
+wrote this code, which just
+goes over a list of numbers
+
+and picks those that
+are divisible by 16,
+
+and then converts them to hex.
+
+So what it actually does
+is filter map, right?
+
+Map is this one, and
+filter is this one.
+
+So what I can do, even with the
+help of my IDE, I can do this.
+
+So newer versions of all
+programming languages
+
+have something like this.
+
+It can definitely leverage this.
+
+So this filter is a function.
+
+This lambda is a function value.
+
+You don't have, by the way,
+to declare it as a variable.
+
+You can just get rid of it.
+
+So that's a lambda parameter.
+
+Kotlin has some nice
+semi-functional things,
+
+like you can say anywhere in
+your code, you can say also.
+
+You have this value, also do
+this for me please-- like print
+
+this list for me.
+
+And then proceed with
+what you were doing.
+
+Like never mind this, it's
+just debug output or some side
+
+effect I want to insert here.
+
+Side effects are not very
+functional, on the one hand.
+
+On the other hand, this is
+very handy for debugging.
+
+You don't have to break
+your chain apart, and so on,
+
+so forth.
+
+Use also, use let, use
+run, and so on, so forth.
+
+There is one very deep thing
+about functional abstractions
+
+in non-functional languages.
+
+When I do something like this,
+I have my repeat function
+
+right here, right?
+
+So what it does,
+it takes a number
+
+of times I want to
+repeat something,
+
+and this something
+is a function.
+
+By the way, you don't have
+to invent your own function
+
+interface every time, just
+use the function types here.
+
+It's a function that takes
+an int or it takes a unit.
+
+Unit is something
+you don't care about.
+
+Then, it simply
+repeats it, right?
+
+So when I say repeat, I'm always
+very much conscious about what
+
+it's going to cost me.
+
+So it's a function.
+
+It takes a lambda
+as a parameter.
+
+So it's actually just
+another parameter.
+
+The Kotlin custom is to write
+it outside the parentheses
+
+because it looks more like a
+language construct like this.
+
+But then, OK, I'm running this.
+
+I have to create a
+lambda object, right?
+
+I have to create a lambda
+object every time I
+
+do anything like this.
+
+So there is a cost
+to this abstraction.
+
+It's nice code.
+
+I can reuse things.
+
+I can raise the level of
+abstraction in my code.
+
+But there is a toll on that.
+
+Actually in Kotlin, you
+can very often get rid
+
+of the toll of green lambdas--
+
+lambda objects-- for you, by
+just using inline functions.
+
+When I say inline, my
+code doesn't change.
+
+So here, nothing happened at
+the call site that I can see.
+
+But if I say show
+Kotlin bytecode,
+
+and just decompile
+this into to Java--
+
+just to scare you a little bit.
+
+It was much of an
+easy talk so far.
+
+So if I do this--
+
+here it goes-- it's
+a simple for loop.
+
+Where did my lambda go?
+
+Well, the compiler
+simply optimized it away.
+
+You don't need a lambda.
+
+So if you simply have your loop
+here and you inline everything,
+
+you end up with a loop.
+
+That's it.
+
+So the big difference
+in the mindset
+
+when you go from the
+Java programming language
+
+to the Kotlin
+programming language
+
+is that you still use lambdas,
+but some of your lambdas
+
+are really free.
+
+And by the way, these
+all are free too.
+
+So many, many lambdas
+in the standard library
+
+are free abstractions.
+
+You don't have to
+pay for calling them.
+
+It's just code
+generated for you.
+
+So functional in Kotlin is not
+only convenient, but also quite
+
+cheap.
+
+Speaking of cheap, by the way,
+let's look at this example.
+
+So here, I'm trying to do
+a parallel computation.
+
+Well, it's a stupid sample.
+
+Nobody does parallel
+computation in bare threads,
+
+so on, so forth, but I
+want to illustrate a point.
+
+So what I'm doing
+here is, again,
+
+with my old habits in mind,
+I'm creating 100,000 threads--
+
+100,000 threads, each of
+which does some work--
+
+actually, sleeps for one second
+and just prints a number.
+
+And then, I have to
+join all these threads
+
+to my main thread.
+
+So if I run this--
+
+oh, oh, oh, that
+was an exception.
+
+What was that?
+
+The Java lang out
+of memory error.
+
+Basically, what it's
+telling me, hey, you
+
+can not create 100,000 threads.
+
+Are you crazy there?
+
+It's 100,000 stacks.
+
+It doesn't fit into memory.
+
+Just get reasonable.
+
+And that's fair.
+
+OS threads are not cheap.
+
+You have to allocate
+resources for threads.
+
+So you don't do such
+silly things with threads,
+
+but I have this example
+down through coroutines.
+
+Who knows about
+coroutines in Kotlin?
+
+Oh, good.
+
+Who uses them in production?
+
+OK, soon enough you all will
+be using them, I'm sure.
+
+So have a look here.
+
+It's very much the same code.
+
+So I'll just put it
+side by side here.
+
+Very much the same code,
+but instead of threads here,
+
+I'm creating async tasks
+which are using coroutines
+
+underneath.
+
+So I'm still waiting for
+one second and printing.
+
+And if I run this, there
+is no out of memory.
+
+It's printing all the
+numbers and I'm good.
+
+So again, Kotlin
+introduced coroutines
+
+as a means of making
+your asynchronous
+
+computations nicer.
+
+And that works, but
+what's the cost of that?
+
+So the cost of that
+is at least cheaper
+
+than having a thread
+per each computation.
+
+Of course, nobody
+does that exactly,
+
+but still coroutines
+are very cheap.
+
+You can spin off like
+100,000 coroutines, a million
+
+coroutines, and it doesn't
+cost you nearly as much
+
+as anything like
+that old threads.
+
+Let me illustrate something
+coroutines are really
+
+good for right here.
+
+So here is a legacy
+interface or--
+
+I don't know-- or a [INAUDIBLE]
+interface-- whatever.
+
+So what we very often have to
+do to make things asynchronous
+
+or make things like
+reverse our dependencies,
+
+so on, so forth, is callbacks.
+
+So just ask me to do something.
+
+I'll do it for you.
+
+And I'll let you
+know when I'm done.
+
+So here, I have my mock service,
+a request, and a callback
+
+function that's passed to it.
+
+So when the work in
+the comments are done,
+
+I'm calling the callback and
+just passing my answer there.
+
+So that's all right.
+
+It's working for
+everyone, right?
+
+But this is what the
+code looks like when
+
+I want to exchange messages
+between two services.
+
+So I just want to basically
+send two messages in sequence.
+
+And here is what I have to do.
+
+First, request.
+
+Then a callback.
+
+This is the result
+of the request.
+
+I print it.
+
+Then next request
+inside that callback.
+
+And then print inside.
+
+So you see the staircase
+right here, right?
+
+One step-- oh, sorry.
+
+One step, two
+steps, three steps.
+
+And you can actually
+get quite deep
+
+down this staircase,
+which is not nice.
+
+So what I would
+really love to do
+
+is something a little
+more straightforward,
+
+but so this is
+kind of tolerable.
+
+But what if-- just
+imagine-- what if you
+
+needed to do like n calls?
+
+Just a number-- like
+make a list of calls.
+
+So this is the code I came up
+with, which isn't nice at all.
+
+So I definitely need
+recursion there,
+
+because I have to nest a
+callback inside a callback
+
+inside a callback, right?
+
+So I need recursion.
+
+This is the shortest code
+I could come up with.
+
+It copies arrays.
+
+Don't do that.
+
+It's wasteful in
+terms of memory,
+
+wasteful in terms of time.
+
+It's quadratic.
+
+But basically, you
+have to come up
+
+with something like
+this-- like nest callbacks
+
+into callbacks into callbacks.
+
+And so you can't just say, OK,
+repeat this five times, right?
+
+So what I really
+want to be able to do
+
+is something like this, where I
+just say, OK, send one request,
+
+wait for results, send
+the other request.
+
+And then if I want
+to repeat something,
+
+just repeat it with a for loop.
+
+So this code here is actually
+using the same callbacks.
+
+Only the coroutine abstractions
+are distributing this away
+
+from me.
+
+So actually, you can take any
+callback-based API you have
+
+now, and turn it into this--
+
+like make it straightforward--
+
+with just a few lines of code.
+
+I'll show you.
+
+So this is calling
+the same services,
+
+because I have this
+function right here.
+
+So what I'm doing, I'm
+just turning the request
+
+into a suspension function
+through this simple construct.
+
+That's an extension function
+of my callback service.
+
+The first thing I say there
+is suspend my coroutines.
+
+So I'm assuming
+I'm in a coroutine,
+
+I suspended it right away,
+I get my continuation,
+
+and I do my request.
+
+That's it.
+
+I'm suspended.
+
+I'm waiting for a request.
+
+So there it is.
+
+And when the request is done,
+I just say resume to coroutine.
+
+That's it.
+
+So this simple lines of code
+turns your callback-based API
+
+into a coroutine API
+and so makes this--
+
+oh, sorry-- makes
+this code into this,
+
+which is a lot more
+readable to my sense.
+
+How do you like it?
+
+OK, I see some nods
+in the audience.
+
+Thank you.
+
+Yeah, well, actually,
+if you wanted
+
+to be a lot more prudent here--
+
+and I'm sure you want to--
+
+you need a catch exceptions.
+
+So catching-- handling your
+exceptions is very important.
+
+And that's as easy as this.
+
+Just catch your exception.
+
+Whatever happens on
+the-- oh, so sorry.
+
+Not here, of course.
+
+Whatever happens
+with your request,
+
+just catch it and
+resumeWithException.
+
+So this will propagate
+exceptions through coroutines
+
+very nicely.
+
+And you'll be able to write
+try catch around here--
+
+like surround this
+with try catch--
+
+I'm sorry, whatever-- and
+catch exceptions there,
+
+as if it was sequential code.
+
+But underneath, it's
+all asynchronous.
+
+You can do HTTP requests like
+this, asyncio, file systems.
+
+You can do background
+threads-- everything you need.
+
+See how isn't it nice?
+
+And I guess, the last example
+I'll be showing you today
+
+is this one.
+
+It's just another showoff for
+how coroutines can help you.
+
+Take a look.
+
+So what I want to
+do is to create
+
+an infinite stream of numbers.
+
+Who likes infinite
+streams of numbers?
+
+I eat them for breakfast.
+
+So I want just a Fibonacci
+sequence to be generated here.
+
+And then, I can take 20 of them.
+
+Here, just a sequence of 20.
+
+I can take 200, 2,000.
+
+I can filter, map,
+slice, whatever.
+
+So this buildSequence
+function is a library function
+
+in the Kotlin standard library.
+
+And it's actually based on the
+same mechanism as coroutines.
+
+It doesn't do any
+background processing.
+
+It's all in the same thread.
+
+What it does, it takes all the
+yield statements from here,
+
+and just puts them
+in a sequence.
+
+So if I want to yield something
+here, I'll just do it.
+
+I insert 2 into my sequence.
+
+If I want to--
+
+say, if tmp is greater
+than 10, continue--
+
+I can skip pieces of my logic.
+
+So that's as straightforward
+as any coroutine.
+
+It gives you a lazy sequence.
+
+So takeaways--
+classes are cheap.
+
+Functions are
+top-level or local.
+
+No overloading to emulate
+your default values.
+
+Use properties, use delegated
+properties, use coroutines.
+
+Have a nice Kotlin.
+
+And I want to advertise
+some more activities today.
+
+So if you still have questions
+that I couldn't take,
+
+you can come over to an office
+hour we're having at 12:30.
+
+You can come over
+to the sandbox area
+
+C, where we're at the
+Kotlin booth, some
+
+of the day at least.
+
+And right after my
+talk, there will
+
+be a talk by Jake Wharton
+about Android KDX, which
+
+is very exciting.
+
+I believe it's on stage two,
+so you're welcome there.
+
+Thank you very much
+for your attention.
+
+[APPLAUSE]
+
+[MUSIC PLAYING]
+
